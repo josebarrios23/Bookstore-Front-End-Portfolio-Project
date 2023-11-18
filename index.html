@@ -5,9 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookstore</title>
     <link href="styles.css" rel="stylesheet" type="text/css">
-  <script defer src="./main.js"></script>
+    <script defer src="./key.js"></script>
+    <script defer src="./main.js"></script>
 </head>
 <body>
-    
+  <main>
+    <section class="new-book-entry">
+      <h2>BOOK SEARCH</h2>
+      <form id="new-book">
+        <!-- FURTHER INSPECTION -->
+        <label for="author-name">Author Name<input id="author" name="author" type="text"></label>
+        <br>
+        <label for="book-title">Book Title<input id="title" name="title" type="text"></label>
+        <br>
+        <label for="book-ammount">How Many Books?<input id="ammount" name="ammount" type="number" required></label>
+        <div>
+          <button id="submit" type="submit">Add Item To Bookshelf</button>
+          <button id="reset-button" type="reset">Reset Form</button>
+        </div>
+      </form>
+    </section>
+    <section class="current-bookshelf">
+      <h2>CURRENT BOOKSHELF</h2>
+      <button id="empty">EMPTY BOOKSHELF</button>
+      <ul id="bookshelf">
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
