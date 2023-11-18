@@ -112,8 +112,10 @@ const {title, authors, publisher} = book.volumeInfo
     
   li.innerHTML += `<h2>${title}</h2>
   <h3>Author: ${authors}</h3>
-  <h3>Publisher: ${publisherAlt}</h3>
-  <h3>Wiki: <a href="https://en.wikipedia.org/wiki/${newAuthStr}">Author Wiki</a></h3>
+  <h3>Publisher: ${publisherAlt}</h3>`
+
+  if (authors.length < 2)
+  li.innerHTML += `<h3>Wiki: <a href="https://en.wikipedia.org/wiki/${newAuthStr}">${authors[0]}</a></h3>
   <br>`
 
   ul.append(li)
