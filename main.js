@@ -33,9 +33,17 @@ empty.addEventListener("click", () => {
     bookshelf.innerHTML = ""
 })
 
+function capitalizeWords(string) {
+  return string.replace(/\b\w/g, (first) => first.toUpperCase());
+}
+
 function displayBook(book){
   let ul = document.querySelector("ul")
   let li = document.createElement("li")
+
+  let author = document.querySelector("#author")
+  let authorValue = author.value
+  let authorCapital = capitalizeWords(authorValue)
     
   li.classList.add("book")
     
@@ -49,6 +57,7 @@ function displayBook(book){
   li.innerHTML += `<h2>${title}</h2>
   <h3>Author: ${authors}<h3>
   <h3>Publisher: ${publisherAlt}<h3>
+  <h3>Wiki: <a href="https://en.wikipedia.org/wiki/${authorCapital}">Author Wiki</a><h3>
   <br>`
 
   ul.append(li)
