@@ -15,7 +15,6 @@ function loadRandomBooks() {
         "art",
         "music",
         "health",
-        "fitness",
         "cooking",
         "sports",
         "education",
@@ -86,7 +85,7 @@ form.addEventListener("submit", (event) => {
     
     .then((response) => response.json())
     .then((data) => data.items.forEach((book) => displayBook(book)))
-    .catch((error) => displayError(error))
+    .catch((error) => alert(`Pleade Add 'Author Name' or 'Book Title'\n${error}`)/*displayError(error)*/)
     
 })
 
@@ -120,27 +119,65 @@ function displayBook(book){
 
 li.classList.add("book")
 
-const {title, authors, publisher} = book.volumeInfo
+const {title, authors, publisher, description, imageLinks, categories} = book.volumeInfo
 
   
   let publisherAlt = "Unknown"
   if (book.volumeInfo.hasOwnProperty("publisher")) {
     publisherAlt = publisher
   }
+
+  let authorsAlt = "Unknown"
+  if (book.volumeInfo.hasOwnProperty("authors")) {
+    authorsAlt = authors
+  }
     
+{/* <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : 'placeholder-image.jpg'}" alt="${title}"></img> */}
+
   li.innerHTML += `
   <br>
+  <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : 'noBook.png'}" alt="${title}"></img>
   <h2>${title}</h2>
-  <h3>Author(s): ${authors}</h3>
+  <button id="add"> Add To Bookshelf</button>
+  <h3>Author(s): ${authorsAlt}</h3>
+  <h3>Genre(s): ${categories}</h3>
   <h3>Publisher: ${publisherAlt}</h3>
+  <p>Description: ${description}</p>
   <br>`
 
+  if (book.volumeInfo.hasOwnProperty("authors")) {
 authors.forEach((author) => {
   let authorModified = author.replace(/ /g, "+")
 
   li.innerHTML += `<h3>Wiki: <a href="https://en.wikipedia.org/w/index.php?search=${authorModified}" target="_blank">${author}</a></h3>`
 })
+  }
 
   ul.append(li)
   
 }
+
+let addBook = document.querySelector("#add")
+let myBooks = document.querySelector("#my-books")
+document.addEventListener("click", (event) => {
+    if (event.target.id === "add") {
+        let closestLi = event.target.closest(".book");
+        let newLi = document.createElement("li")
+        newLi.classList.add("new-book")
+        newLi.innerHTML = closestLi.innerHTML
+        myBooks.append(newLi);
+
+        let removeButton = document.createElement("button")
+        removeButton.id = "remove-book"
+        removeButton.innerText = "Remove Book"
+        newLi.append(removeButton)
+    }
+});
+
+let removeBook = document.querySelector("#remove-book")
+document.addEventListener("click", (event) => {
+    if (event.target.id === "remove-book") {
+        let closestLi = event.target.closest(".new-book");
+        closestLi.remove()
+    }
+});
