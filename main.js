@@ -40,15 +40,31 @@ function loadRandomBooks() {
     .then((data) => {
         data.items.forEach((book) => displayBook(book))
       })
+      .catch((error) => displayError(error))
 }
 
 loadRandomBooks()
+
+function displayError(error) {
+    const section = document.querySelector("section.error")
+    section.style.display = "block"
+  
+    section.innerHTML = `
+    <p>Something went wrong!</p>
+    <p>Please provide a "Book Title" or "Author Name".</p>
+    <p class="error-message">(${error})</p>`
+  }
 
 let form = document.querySelector("form")
 
 form.addEventListener("submit", (event) => {
     event.preventDefault()
-    
+
+    const errorSection = document.querySelector("section.error")
+    errorSection.style.display = "none"
+
+    let bookshelf = document.querySelector("#bookshelf");
+    bookshelf.innerHTML = ""
     
     let title = document.querySelector("#title")
     let titleValue = title.value
@@ -60,8 +76,8 @@ form.addEventListener("submit", (event) => {
     let authorValue = author.value
     let authorConversion = authorValue ? authorValue.replace(/ /g, "+") : "*"
     
-    let ammount = document.querySelector("#ammount")
-    let maxResults = ammount.value
+    let amount = document.querySelector("#amount")
+    let maxResults = amount.value
     
     // fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${titleConversion}&maxResults=${maxResults}&key=${API_KEY}`)
     
@@ -70,18 +86,24 @@ form.addEventListener("submit", (event) => {
     
     .then((response) => response.json())
     .then((data) => data.items.forEach((book) => displayBook(book)))
+    .catch((error) => displayError(error))
     
 })
 
+function emptyBookshelf() {
+const errorSection = document.querySelector("section.error")
 let empty = document.querySelector("#empty")
 let bookshelf = document.querySelector("#bookshelf")
 empty.addEventListener("click", () => {
+    errorSection.style.display = "none"
     bookshelf.innerHTML = ""
 })
-
-function capitalizeWords(string) {
-  return string.replace(/\b\w/g, (first) => first.toUpperCase());
 }
+emptyBookshelf()
+
+// function capitalizeWords(string) {
+//   return string.replace(/\b\w/g, (first) => first.toUpperCase());
+// }
 
 // function capitalizeWords(string) {
 //   return string.split(' ')
@@ -95,28 +117,29 @@ function displayBook(book){
 //   let author = document.querySelector("#author")
 //   let authorValue = author.value
 //   let authorCapital = capitalizeWords(authorValue)
-    
 
 li.classList.add("book")
 
 const {title, authors, publisher} = book.volumeInfo
 
-  let authorArr = authors[0].split(" ")
-  let newAuthArr = [authorArr[0], authorArr[authorArr.length -1]]
-  let newAuthStr = (newAuthArr.join(" ")).replace(/ /g, "_")
-
+  
   let publisherAlt = "Unknown"
   if (book.volumeInfo.hasOwnProperty("publisher")) {
     publisherAlt = publisher
   }
     
-  li.innerHTML += `<h2>${title}</h2>
-  <h3>Author: ${authors}</h3>
-  <h3>Publisher: ${publisherAlt}</h3>`
-
-  if (authors.length < 2)
-  li.innerHTML += `<h3>Wiki: <a href="https://en.wikipedia.org/wiki/${newAuthStr}">${authors[0]}</a></h3>
+  li.innerHTML += `
+  <br>
+  <h2>${title}</h2>
+  <h3>Author(s): ${authors}</h3>
+  <h3>Publisher: ${publisherAlt}</h3>
   <br>`
+
+authors.forEach((author) => {
+  let authorModified = author.replace(/ /g, "+")
+
+  li.innerHTML += `<h3>Wiki: <a href="https://en.wikipedia.org/w/index.php?search=${authorModified}" target="_blank">${author}</a></h3>`
+})
 
   ul.append(li)
   
