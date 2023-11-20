@@ -13,6 +13,8 @@
 
 html {
     background-color: var(--alabaster);
+    background-image: url('./floatingbooks.png');
+    background-size: cover;
 }
 
 img {
@@ -28,7 +30,7 @@ body{
 
 #html-link {
     display: block;
-    text-align: right;
+    text-align: center;
 }
 
 form {
@@ -82,6 +84,21 @@ ul {
 ul {
     list-style: none;
     padding: 0;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+#top-h1 {
+    margin: 0 auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 li {
@@ -92,6 +109,17 @@ li {
     margin: 0 auto;
     margin-bottom: 15px;
     padding-bottom: 10px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 button {
