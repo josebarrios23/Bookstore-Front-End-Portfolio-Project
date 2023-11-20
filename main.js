@@ -66,17 +66,17 @@ form.addEventListener("submit", (event) => {
     let bookshelf = document.querySelector("#bookshelf");
     bookshelf.innerHTML = ""
     
-    let title = document.querySelector("#title")
+    let title = event.target.elements["title"]
     let titleValue = title.value
     let titleConversion = titleValue ? titleValue.
     //SUPER USEFUL "/ /g"
     replace(/ /g, "+") : "*"
     
-    let author = document.querySelector("#author")
+    let author = event.target.elements["author"]
     let authorValue = author.value
     let authorConversion = authorValue ? authorValue.replace(/ /g, "+") : "*"
     
-    let amount = document.querySelector("#amount")
+    let amount = event.target.elements["amount"]
     let maxResults = amount.value
     
     // fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${titleConversion}&maxResults=${maxResults}&key=${API_KEY}`)
@@ -184,6 +184,11 @@ document.addEventListener("click", (event) => {
         newLi.innerHTML = closestLi.innerHTML
         myBooks.append(newLi);
 
+        let bookshelfButton = newLi.querySelector("#add");
+            if (bookshelfButton) {
+                bookshelfButton.remove();
+            }
+        
         let removeButton = document.createElement("button")
         removeButton.id = "remove-book"
         removeButton.innerText = "Remove Book"
