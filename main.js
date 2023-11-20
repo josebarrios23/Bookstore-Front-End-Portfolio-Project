@@ -104,7 +104,7 @@ function displayBook(book) {
 
     li.classList.add("book");
 
-    const { title, authors, publisher, description, imageLinks, categories } = book.volumeInfo;
+    const { title, authors, publisher, description, imageLinks, categories, pageCount } = book.volumeInfo;
 
     let publisherAlt = "Unknown";
     if (book.volumeInfo.hasOwnProperty("publisher")) {
@@ -121,6 +121,11 @@ function displayBook(book) {
         genresAlt = categories;
     }
 
+    let pageCountAlt = "Unknown";
+    if (book.volumeInfo.hasOwnProperty("pageCount")) {
+        pageCountAlt = pageCount;
+    }
+
     let descriptionAlt = "Unavailable";
     if (book.volumeInfo.hasOwnProperty("description")) {
         descriptionAlt = description;
@@ -131,9 +136,10 @@ function displayBook(book) {
     <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : 'noBook.png'}" alt="${title}"></img>
     <h3>"${title}"</h3>
     <button id="add"> Add To Bookshelf</button>
-    <h3>Author(s): ${authorsAlt}</h3>
-    <h3>Genre(s): ${genresAlt}</h3>
-    <h3>Publisher: ${publisherAlt}</h3>
+    <h3>AUTHOR(S) - ${authorsAlt}</h3>
+    <h3>GENRE(S) - ${genresAlt}</h3>
+    <h3>PAGE COUNT - ${pageCountAlt} pages</h3>
+    <h3>PUBLISHER - ${publisherAlt}</h3>
     <p class="hidden description">${descriptionAlt}</p>
     <button value="show" id="unhide">Description</button>
     <br>`;
