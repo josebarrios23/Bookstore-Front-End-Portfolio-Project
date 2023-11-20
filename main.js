@@ -50,9 +50,10 @@ function displayError(error) {
   
     section.innerHTML = `
     <p>Something went wrong!</p>
-    <p>Please provide a "Book Title" or "Author Name".</p>
     <p class="error-message">(${error})</p>`
-  }
+}
+
+/* <p>Please provide a "Book Title" or "Author Name".</p> */
 
 let form = document.querySelector("form")
 
@@ -85,7 +86,12 @@ form.addEventListener("submit", (event) => {
     
     .then((response) => response.json())
     .then((data) => data.items.forEach((book) => displayBook(book)))
-    .catch((error) => alert(`Pleade Add 'Author Name' or 'Book Title'\n${error}`)/*displayError(error)*/)
+    .catch((error) => {
+        if (maxResults > 40) {
+            displayError(`Max Book Limit Reached (40 Books) -- ${error}`)}
+        else {
+            displayError(`Please add Author Name or Book Title -- ${error}`)
+        }})
     
 })
 
@@ -131,18 +137,29 @@ const {title, authors, publisher, description, imageLinks, categories} = book.vo
   if (book.volumeInfo.hasOwnProperty("authors")) {
     authorsAlt = authors
   }
+
+  let genresAlt = "Unknown"
+  if (book.volumeInfo.hasOwnProperty("categories")) {
+    genresAlt = categories
+  }
+
+  let descriptionAlt = "Unavailable"
+  if (book.volumeInfo.hasOwnProperty("description")) {
+    descriptionAlt = description
+  }
     
 {/* <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : 'placeholder-image.jpg'}" alt="${title}"></img> */}
 
   li.innerHTML += `
   <br>
   <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : 'noBook.png'}" alt="${title}"></img>
-  <h2>${title}</h2>
+  <h3>"${title}"</h3>
   <button id="add"> Add To Bookshelf</button>
   <h3>Author(s): ${authorsAlt}</h3>
-  <h3>Genre(s): ${categories}</h3>
+  <h3>Genre(s): ${genresAlt}</h3>
   <h3>Publisher: ${publisherAlt}</h3>
-  <p>Description: ${description}</p>
+  <p class="hidden description">${descriptionAlt}</p>
+  <button value="show" id="unhide">Show Description</button>
   <br>`
 
   if (book.volumeInfo.hasOwnProperty("authors")) {
@@ -181,3 +198,14 @@ document.addEventListener("click", (event) => {
         closestLi.remove()
     }
 });
+
+let unhideDescrip = document.querySelector("#unhide")
+let descrip = document.querySelector(".hidden")
+document.addEventListener("click", (event) => {
+  if (event.target.id === "unhide") {
+    const listItem = event.target.closest('li');
+    const descrip = listItem.querySelector('.description');
+        descrip.classList.toggle('hidden')
+  }
+})
+
