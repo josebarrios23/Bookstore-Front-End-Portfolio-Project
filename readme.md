@@ -1,9 +1,8 @@
-![Bookshelf Banner](bookshelf-banner.png)
-
+<p align="center">
+  <img src="bookshelf-banner.png" alt="Bookshelf Banner" width="1000">
+</p>
 
 Welcome to Bookshelf! An interactive web application that allows you to explore and manage your book collection.
-
-Visit The Site Now: https://josebarrios23.github.io/Bookstore-Front-End-Portfolio-Project/
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -39,6 +38,9 @@ Bookshelf is a web application that leverages the Google Books API to help you d
 
 - **Wikipedia Links:**
     - Click on the provided Wikipedia links to learn more about the authors.
+
+- **STRETCH GOALS:**
+    - Used animations (ul's fade  in) and added links to a wiki for each author in an array.
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests to help improve the application at https://github.com/josebarrios23/Bookstore-Front-End-Portfolio-Project
