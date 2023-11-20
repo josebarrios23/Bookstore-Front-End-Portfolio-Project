@@ -67,6 +67,10 @@ h3 {
 ul {
     max-height: 1200px;
     overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
 }
 
 .book-results {
@@ -79,13 +83,6 @@ ul {
     color: red;
     padding: 25px;
     text-align: center;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
 }
 
 #top-h1 {
