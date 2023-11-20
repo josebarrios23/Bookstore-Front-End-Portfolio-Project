@@ -154,6 +154,10 @@ button:hover {
     text-align: center;
 }
 
+#title-color {
+    color: var(--pacific-cyan);
+}
+
 @media (max-width: 800px) {
     .book-results {
         display: grid;

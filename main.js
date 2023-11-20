@@ -134,7 +134,7 @@ function displayBook(book) {
     li.innerHTML += `
     <br>
     <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : 'noBook.png'}" alt="${title}"></img>
-    <h3>"${title}"</h3>
+    <h3 id="title-color">"${title}"</h3>
     <button id="add"> Add To Bookshelf</button>
     <h3>AUTHOR(S) - ${authorsAlt}</h3>
     <h3>GENRE(S) - ${genresAlt}</h3>
