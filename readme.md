@@ -7,6 +7,7 @@ Welcome to Bookshelf! An interactive web application that allows you to explore 
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
+- [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 
@@ -19,6 +20,23 @@ Bookshelf is a web application that leverages the Google Books API to help you d
 - **Interactive Bookshelf:** Easily add books from the search results to your personal bookshelf and remove them as needed.
 - **Additional Book Details:** Get detailed information about each book, including the author, genre, page count, publisher, and a brief description.
 - **Wikipedia Links:** Explore Wikipedia pages for authors directly from the application.
+
+## Installation
+1. Clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/josebarrios23/Bookstore-Front-End-Portfolio-Project
+    ```
+
+2. Open the `index.html` file in your web browser.
+
+3. Get your Google Books API key:
+    - Visit the [Google Cloud Console](https://console.cloud.google.com/).
+    - Create a new project and enable the Google Books API.
+    - Generate an API key and replace the placeholder in `main.js` with your key.
+
+4. Explore and enjoy the Bookshelf application!
+
 
 ## Usage
 - **Random Book Search:**
