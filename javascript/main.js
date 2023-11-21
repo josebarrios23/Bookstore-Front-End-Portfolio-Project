@@ -133,7 +133,7 @@ function displayBook(book) {
 
     li.innerHTML += `
     <br>
-    <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : 'noBook.png'}" alt="${title}"></img>
+    <img src="${imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : '../assets/noBook.png'}" alt="${title}"></img>
     <h3 id="title-color">"${title}"</h3>
     <button id="add"> Add To Bookshelf</button>
     <h3>AUTHOR(S) - ${authorsAlt}</h3>
@@ -163,7 +163,7 @@ document.addEventListener("click", (event) => {
         const newLi = document.createElement("li");
         newLi.classList.add("new-book");
         newLi.innerHTML = closestLi.innerHTML;
-        myBooks.append(newLi);
+        myBooks.prepend(newLi);
 
         const bookshelfButton = newLi.querySelector("#add");
         if (bookshelfButton) {

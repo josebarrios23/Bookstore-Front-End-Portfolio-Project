@@ -13,7 +13,7 @@
 
 html {
     background-color: var(--alabaster);
-    background-image: url('./floatingbooks.png');
+    background-image: url('./assets/floatingbooks.png');
     background-size: cover;
 }
 
@@ -147,6 +147,8 @@ button:hover {
 #about-me-links {
     text-align: center;
     width: 100px;
+    background: none;
+    border: none;
 }
 
 #about-me-paragraph {
